@@ -10,7 +10,6 @@ BUILD := ./build
 
 SOURCES = $(wildcard $(SRC)/*.cpp)
 OBJECTS = $(patsubst $(SRC)/%.cpp,$(BUILD)/%.o,$(SOURCES))
-
 EXECUTABLES = $(patsubst $(SRC)/%.cpp,$(BUILD)/%,$(SOURCES))
 
 all: dir $(EXECUTABLES)
@@ -18,7 +17,7 @@ all: dir $(EXECUTABLES)
 dir:
 	mkdir -p $(BUILD)
 
-$(EXECUTABLES) : $(BUILD)/%: $(BUILD)/%.o
+$(EXECUTABLES): $(BUILD)/%: $(BUILD)/%.o
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
 $(OBJECTS): $(BUILD)/%.o : $(SRC)/%.cpp
